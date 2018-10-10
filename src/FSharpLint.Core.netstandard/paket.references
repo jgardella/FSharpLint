@@ -1,4 +1,5 @@
 group NetCore
 
 FSharp.Compiler.Service
+Dotnet.ProjInfo
 FParsec

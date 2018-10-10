@@ -100,6 +100,7 @@ module Lint =
     open FSharpLint
     open FSharpLint.Framework
     open FSharpLint.Framework.AbstractSyntaxArray
+    open FSharpLint.ProjectCoreCracker
 
     type BuildFailure = | InvalidProjectFileMessage of string
 
@@ -263,8 +264,7 @@ module Lint =
         // so if run as an msbuild task without this property we'd end up with an infinite loop of builds (taking out the machine).
         let msBuildProperties = ["FSharpLintEnabled", "false"]
 
-        let projectOptions, log =
-            ProjectCracker.GetProjectOptionsFromProjectFileLogged(projectFilePath, msBuildProperties)
+        let projectOptions, _, log = projInfo msBuildProperties projectFilePath
 
         let invalidProjectFile, fileNotFound =
             "Microsoft.Build.Exceptions.InvalidProjectFileException", "System.IO.FileNotFoundException"

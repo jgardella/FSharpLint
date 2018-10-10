@@ -22,6 +22,7 @@ group Netcore
 storage: none
 source https://www.nuget.org/api/v2/
 
+nuget Dotnet.ProjInfo
 nuget FSharp.Core >= 4.3.4
 nuget FSharp.Compiler.Service
 nuget FParsec
