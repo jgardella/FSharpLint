@@ -1,6 +1,8 @@
 RESTRICTION: == net45
 NUGET
   remote: https://www.nuget.org/api/v2
+    Dotnet.ProjInfo (0.11)
+      FSharp.Core (>= 4.0.0.1)
     FAKE.Lib (4.64.4)
     FParsec (1.0.3)
       FSharp.Core (>= 4.0.0.1)

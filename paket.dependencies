@@ -5,7 +5,8 @@ nuget FParsec
 nuget NUnit
 nuget FSharp.Compiler.Service
 nuget FSharp.Compiler.Service.ProjectCracker
-nuget FAKE.Lib
+nuget Dotnet.ProjInfo
+nuget FAKE.Lib = 4.64.4
 nuget FSharp.Core
 nuget System.Collections.Immutable < 1.4
 
