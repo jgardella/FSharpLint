@@ -8,6 +8,7 @@ nuget FSharp.Compiler.Service.ProjectCracker
 nuget FAKE.Lib
 nuget FSharp.Core
 nuget System.Collections.Immutable < 1.4
+nuget NUnit3TestAdapter
 
 group Tools
 source https://nuget.org/api/v2
