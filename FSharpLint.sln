@@ -17,6 +17,8 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharpLint.FunctionalTest",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FSharpLint.VisualStudio", "src\FSharpLint.VisualStudio\FSharpLint.VisualStudio.csproj", "{983280F5-B482-43E2-B07D-3A7F5F92E568}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpLint.VisualStudio.FSharp", "src\FSharpLint.VisualStudio.FSharp\FSharpLint.VisualStudio.FSharp.fsproj", "{44061E2C-A354-4C68-B12F-68EED4A8D9EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,18 @@ Global
 		{983280F5-B482-43E2-B07D-3A7F5F92E568}.Release|x64.Build.0 = Release|Any CPU
 		{983280F5-B482-43E2-B07D-3A7F5F92E568}.Release|x86.ActiveCfg = Release|Any CPU
 		{983280F5-B482-43E2-B07D-3A7F5F92E568}.Release|x86.Build.0 = Release|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Debug|x64.Build.0 = Debug|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Debug|x86.Build.0 = Debug|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Release|x64.ActiveCfg = Release|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Release|x64.Build.0 = Release|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Release|x86.ActiveCfg = Release|Any CPU
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +111,7 @@ Global
 		{E51042D9-CE14-4373-AE1E-FEB78FE23F40} = {1CD44876-BCDC-4C93-9DC2-C45244BD62AE}
 		{0DE70980-49E9-4613-84D4-FCF6ACABA5EE} = {1CD44876-BCDC-4C93-9DC2-C45244BD62AE}
 		{983280F5-B482-43E2-B07D-3A7F5F92E568} = {40C2798B-7078-4D4F-BD37-195240CB827B}
+		{44061E2C-A354-4C68-B12F-68EED4A8D9EF} = {40C2798B-7078-4D4F-BD37-195240CB827B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B54B4B7D-F019-48A3-BB5B-635B68FE41C3}
