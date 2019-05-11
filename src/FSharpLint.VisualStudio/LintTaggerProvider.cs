@@ -32,7 +32,6 @@ namespace FSharpLint.VisualStudioExtension
 
         [Export(typeof(ErrorTypeDefinition))]
         [Name(Constants.LintTagErrorType)]
-        [DisplayName(Constants.LintTagErrorType)]
         internal static ErrorTypeDefinition LintErrorTypeDefinition = null;
     }
 

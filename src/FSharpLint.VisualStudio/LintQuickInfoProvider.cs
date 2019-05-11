@@ -11,13 +11,13 @@ using System.ComponentModel.Composition;
 
 namespace FSharpLint.VisualStudioExtension
 {
-    [Export(typeof(IQuickInfoSourceProvider))]
+    [Export(typeof(IAsyncQuickInfoSourceProvider))]
     [Name("F# Lint Quick Info Provider")]
     [Order(Before = "Default Quick Info Presenter")]
     [ContentType("F#")]
     [TextViewRole(PredefinedTextViewRoles.Editable)]
     [TextViewRole(PredefinedTextViewRoles.PrimaryDocument)]
-    internal class LintQuickInfoProvider : IQuickInfoSourceProvider
+    internal class LintQuickInfoProvider : IAsyncQuickInfoSourceProvider
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IViewTagAggregatorFactoryService _viewTagAggregatorFactoryService;
@@ -31,7 +31,7 @@ namespace FSharpLint.VisualStudioExtension
             _viewTagAggregatorFactoryService = viewTagAggregatorFactoryService;
         }
 
-        public IQuickInfoSource TryCreateQuickInfoSource(ITextBuffer textBuffer)
+        public IAsyncQuickInfoSource TryCreateQuickInfoSource(ITextBuffer textBuffer)
         {
             var generalOptions = Setting.getGeneralOptions(_serviceProvider);
             if (generalOptions == null || !generalOptions.LinterEnabled) return null;
