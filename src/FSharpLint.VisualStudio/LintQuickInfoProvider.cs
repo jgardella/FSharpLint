@@ -1,15 +1,15 @@
-using FSharp.Editing.VisualStudio;
-using FSharp.Editing.VisualStudio.Linting;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
+using FSharpLint.VisualStudio;
+using FSharpLint.VisualStudio.FSharp.Linting;
 using System;
 using System.ComponentModel.Composition;
 
-namespace FSharpLint.VisualStudio
+namespace FSharpLint.VisualStudioExtension
 {
     [Export(typeof(IQuickInfoSourceProvider))]
     [Name("F# Lint Quick Info Provider")]

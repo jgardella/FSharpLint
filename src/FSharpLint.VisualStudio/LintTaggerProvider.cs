@@ -1,6 +1,3 @@
-using FSharp.Editing.VisualStudio;
-using FSharp.Editing.VisualStudio.Linting;
-using FSharp.Editing.VisualStudio.ProjectSystem;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Adornments;
@@ -8,11 +5,14 @@ using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
+using FSharpLint.VisualStudio;
+using FSharpLint.VisualStudio.FSharp.Linting;
+using FSharpLint.VisualStudio.FSharp.ProjectSystem;
 using System;
 using System.ComponentModel.Composition;
 using System.Windows.Media;
 
-namespace FSharpLint.VisualStudio
+namespace FSharpLint.VisualStudioExtension
 {
     static class FormatDefinition
     {

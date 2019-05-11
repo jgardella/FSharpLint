@@ -1,5 +1,6 @@
 FSharp.Compiler.Service
 FSharp.Core
+FSharp.ViewModule.Core
 
 group vssdklegacy
   VSSDK.DTE
