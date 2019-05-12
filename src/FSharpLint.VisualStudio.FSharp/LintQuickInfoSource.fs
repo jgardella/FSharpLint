@@ -1,14 +1,13 @@
 ﻿namespace FSharpLint.VisualStudio.FSharp.Linting
 
 open Microsoft.VisualStudio.Text
-open Microsoft.VisualStudio.Text.Tagging
 open Microsoft.VisualStudio.Language.Intellisense
 open System.Collections.Generic
+open Microsoft.VisualStudio.Text.Tagging
 open FSharpLint.VisualStudio
 open System.Windows.Controls
 open System.Windows.Documents
 open System.Windows
-open System.Threading
 
 type LintQuickInfoSource(buffer: ITextBuffer, viewTagAggregatorFactoryService: IViewTagAggregatorFactoryService) =
     let createInfoText (tooltips: string list) : UIElement =
@@ -31,11 +30,12 @@ type LintQuickInfoSource(buffer: ITextBuffer, viewTagAggregatorFactoryService: I
             tagAggregator <- Some aggregator
             aggregator)
 
-    interface IAsyncQuickInfoSource with
-        member __.GetQuickInfoItemAsync (session: IAsyncQuickInfoSession, cancellationToken: CancellationToken) = 
+    interface IQuickInfoSource with
+        member __.AugmentQuickInfoSession (session: IQuickInfoSession, quickInfoContent: IList<obj>, 
+                                           applicableToSpan: byref<ITrackingSpan>) = 
             if session.TextView.TextBuffer = buffer then
                 match session.GetTriggerPoint buffer.CurrentSnapshot |> Option.ofNullable with
-                | None -> Tasks.Task.FromResult<QuickInfoItem>(null)
+                | None -> ()
                 | Some point ->
                     let span = buffer.CurrentSnapshot.FullSpan
                     let res =
@@ -49,12 +49,9 @@ type LintQuickInfoSource(buffer: ITextBuffer, viewTagAggregatorFactoryService: I
                         |> Seq.toList
 
                     match res with
-                    | [] -> Tasks.Task.FromResult<QuickInfoItem>(null)
+                    | [] -> ()
                     | (span, _) :: _ ->
-                        let applicableToSpan = buffer.CurrentSnapshot.CreateTrackingSpan (span.Span, SpanTrackingMode.EdgeExclusive)
-                        let item = res |> List.map snd |> createInfoText
-                        Tasks.Task.FromResult(QuickInfoItem(applicableToSpan, item))
-            else
-                Tasks.Task.FromResult<QuickInfoItem>(null)
+                        applicableToSpan <- buffer.CurrentSnapshot.CreateTrackingSpan (span.Span, SpanTrackingMode.EdgeExclusive)
+                        res |> List.map snd |> createInfoText |> quickInfoContent.Add
         
         member __.Dispose() = tagAggregator |> Option.iter (fun x -> x.Dispose())
