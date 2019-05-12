@@ -20,5 +20,6 @@
         <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
         <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%.FSharp" Path="|FSharpLint.VisualStudio.FSharp|" />
         <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%.FSharp" Path="|FSharpLint.VisualStudio.FSharp|" AssemblyName="|FSharpLint.VisualStudio.FSharp;AssemblyName|" />
+        <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="FSharpLint.Core" Path="|FSharpLint.Core|" AssemblyName="|FSharpLint.Core;AssemblyName|" />
     </Assets>
 </PackageManifest>

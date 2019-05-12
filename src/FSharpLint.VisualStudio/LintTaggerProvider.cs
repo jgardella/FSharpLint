@@ -67,9 +67,6 @@ namespace FSharpLint.VisualStudioExtension
         {
             if (textView.TextBuffer != buffer) return null;
 
-            var generalOptions = Setting.getGeneralOptions(_serviceProvider);
-            if (generalOptions == null || !generalOptions.LinterEnabled) return null;
-
             ITextDocument doc;
             if (_textDocumentFactoryService.TryGetTextDocument(buffer, out doc))
             {

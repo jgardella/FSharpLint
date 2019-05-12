@@ -33,9 +33,6 @@ namespace FSharpLint.VisualStudioExtension
 
         public IQuickInfoSource TryCreateQuickInfoSource(ITextBuffer textBuffer)
         {
-            var generalOptions = Setting.getGeneralOptions(_serviceProvider);
-            if (generalOptions == null || !generalOptions.LinterEnabled) return null;
-
             return new LintQuickInfoSource(textBuffer, _viewTagAggregatorFactoryService);
         }
     }

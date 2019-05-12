@@ -86,6 +86,7 @@
     <ProjectReference Include="..\FSharpLint.Core\FSharpLint.Core.fsproj">
       <Name>FSharpLint.Core</Name>
       <Project>{7691e4e4-ec5b-4751-9578-109258a3b1da}</Project>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

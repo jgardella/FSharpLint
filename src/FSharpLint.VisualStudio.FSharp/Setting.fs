@@ -102,32 +102,3 @@ module ServiceProviderUtils =
     type System.IServiceProvider with
         member x.GetService<'T>() = x.GetService(typeof<'T>) :?> 'T
         member x.GetService<'T, 'S>() = x.GetService(typeof<'S>) :?> 'T
-
-[<RequireQualifiedAccess>]
-module Setting =
-    open System
-     
-    let getGeneralOptions (serviceProvider: IServiceProvider) =
-        serviceProvider.GetService<IGeneralOptions>()
-
-    let getFormattingOptions (serviceProvider: IServiceProvider) =
-        serviceProvider.GetService<IFormattingOptions>()
-
-    let getCodeGenerationOptions (serviceProvider: IServiceProvider) =
-        serviceProvider.GetService<ICodeGenerationOptions>()
-
-    let getDefaultMemberBody (codeGenOptions: ICodeGenerationOptions) =
-        match codeGenOptions.CodeGenerationOptions with
-        | CodeGenerationKinds.Failwith -> "failwith \"Not implemented yet\""
-        | CodeGenerationKinds.NotImplementedYet -> "raise (System.NotImplementedException())"
-        | CodeGenerationKinds.DefaultValue -> "Unchecked.defaultof<_>"
-        | _ -> codeGenOptions.DefaultBody
-        
-    let getGlobalOptions (serviceProvider: IServiceProvider) =
-        serviceProvider.GetService<IGlobalOptions>()
-        
-    let getLintOptions (serviceProvider: IServiceProvider) =
-        serviceProvider.GetService<ILintOptions>()
-
-    let getOutliningOptions (serviceProvider: IServiceProvider) =
-        serviceProvider.GetService<IOutliningOptions>()
