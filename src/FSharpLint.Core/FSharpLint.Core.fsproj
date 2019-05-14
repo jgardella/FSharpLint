@@ -114,6 +114,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="../FSharpLint.Core/Text.resx">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
