@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;net461</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <RootNamespace>FSharpLint.Core.Tests</RootNamespace>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="TestUtils.fs" />
     <!-- Framework -->
@@ -64,8 +64,8 @@
     <Compile Include="Rules\Binding\WildcardNamedWithAsPattern.fs" />
     <Compile Include="Rules\Binding\TupleOfWildcards.fs" />
     <Compile Include="Rules\Hints\HintMatcher.fs" />
+    <Content Include="app.config" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Framework\TestConfiguration.fs" />
     <Compile Include="Framework\TestAstInfo.fs" />
@@ -75,16 +75,13 @@
     <Compile Include="Framework\TestAbstractSyntaxArray.fs" />
     <Compile Include="Framework\TestExpressionUtilities.fs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\FSharpLint.Core\FSharpLint.Core.fsproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="OldConfiguration.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

@@ -1,25 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;net461</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <RootNamespace>FSharpLint.FunctionalTest</RootNamespace>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-
   <ItemGroup>
+    <None Include="FSharp.Json.Error.fsx" />
     <Compile Include="TestConsoleApplication.fs" />
     <Compile Include="TestApi.fs" />
+    <Content Include="app.config" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\FSharpLint.Core\FSharpLint.Core.fsproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="OldConfiguration.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
