@@ -9,6 +9,7 @@ open FSharpLint.Application
 type private OutputFormat =
     | Standard = 1
     | MSBuild = 2
+    | Warnings = 3
 
 /// File type the linter is running against.
 type private FileType =
@@ -71,9 +72,10 @@ let private start (arguments:ParseResults<ToolArgs>) =
     let (output:Output.IOutput) =
         match arguments.TryGetResult Format with
         | Some OutputFormat.MSBuild -> Output.MSBuildOutput() :> Output.IOutput
+        | Some OutputFormat.Warnings -> Output.StandardOutput(true) :> Output.IOutput
         | Some OutputFormat.Standard
         | Some _
-        | None -> Output.StandardOutput() :> Output.IOutput
+        | None -> Output.StandardOutput(false) :> Output.IOutput
 
     let handleError (str:string) =
         output.WriteError str

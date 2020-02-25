@@ -12,7 +12,7 @@ type IOutput =
     /// Outputs an unexpected error in linting.
     abstract member WriteError : string -> unit
 
-type StandardOutput () =
+type StandardOutput (onlyWarnings:bool) =
 
     let getErrorMessage (range:FSharp.Compiler.Range.range) =
         let error = Resources.GetString("LintSourceError")
@@ -34,13 +34,16 @@ type StandardOutput () =
         Console.ForegroundColor <- originalColour
 
     interface IOutput with
-        member __.WriteInfo (info:string) = writeLine info ConsoleColor.White Console.Out
+        member __.WriteInfo (info:string) =
+            if not onlyWarnings then writeLine info ConsoleColor.White Console.Out
         member this.WriteWarning (warning:Suggestion.LintWarning) =
             let highlightedErrorText = highlightErrorText warning.Details.Range (getErrorMessage warning.Details.Range)
-            let str = warning.Details.Message + Environment.NewLine + highlightedErrorText + Environment.NewLine + warning.ErrorText
+            let filePath = if onlyWarnings then sprintf "In file: %s\n" warning.FilePath else ""
+            let str = sprintf "%s%s\n%s\n%s" filePath warning.Details.Message highlightedErrorText warning.ErrorText
             writeLine str ConsoleColor.Yellow Console.Out
             String.replicate 80 "-" |> (this :> IOutput).WriteInfo
-        member __.WriteError (error:string) =  writeLine error ConsoleColor.Red Console.Error
+        member __.WriteError (error:string) =
+            if not onlyWarnings then writeLine error ConsoleColor.Red Console.Error
 
 type MSBuildOutput () =
     interface IOutput with
