@@ -187,3 +187,6 @@ tests/FSharpLint.FunctionalTest.TestedProject/FSharpLintMSBuildTaskTest/
 DesignTimeBuild/
 .vs/
 .ionide/
+
+.paket
+paket-files
