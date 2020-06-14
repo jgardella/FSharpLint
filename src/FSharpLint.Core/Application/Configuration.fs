@@ -296,7 +296,7 @@ with
 type ConventionsConfig =
     { recursiveAsyncFunction:EnabledConfig option
       redundantNewKeyword:EnabledConfig option
-      nestedStatements:RuleConfig<NestedStatements.Config> option
+      nestedStatements:RuleConfig<NestedStatements.ConfigDto option> option
       reimplementsFunction:EnabledConfig option
       canBeReplacedWithComposition:EnabledConfig option
       raiseWithTooManyArgs:RaiseWithTooManyArgsConfig option
@@ -373,7 +373,7 @@ type Configuration =
       PatternMatchExpressionIndentation:EnabledConfig option
       RecursiveAsyncFunction:EnabledConfig option
       RedundantNewKeyword:EnabledConfig option
-      NestedStatements:RuleConfig<NestedStatements.Config> option
+      NestedStatements:RuleConfig<NestedStatements.ConfigDto option> option
       ReimplementsFunction:EnabledConfig option
       CanBeReplacedWithComposition:EnabledConfig option
       RaiseWithSingleArgument:EnabledConfig option

@@ -5,7 +5,7 @@ open FSharpLint.Rules
 
 [<TestFixture>]
 type TestFormattingPatternMatchClauseIndentation() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(PatternMatchClauseIndentation.rule { PatternMatchClauseIndentation.Config.AllowSingleLineLambda = false })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(PatternMatchClauseIndentation.rule (Some { PatternMatchClauseIndentation.ConfigDto.AllowSingleLineLambda = Some false }))
 
     [<Test>]
     member this.``Error for pattern match clauses at different indentation``() =
@@ -134,7 +134,7 @@ match "x" with
 
 [<TestFixture>]
 type TestFormattingPatternMatchClauseIndentationAllowSingleLineLambda() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(PatternMatchClauseIndentation.rule { PatternMatchClauseIndentation.Config.AllowSingleLineLambda = true })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(PatternMatchClauseIndentation.rule (Some { PatternMatchClauseIndentation.ConfigDto.AllowSingleLineLambda = Some true }))
 
     [<Test>]
     member this.``No error for single-line lambda pattern match when allowed``() =

@@ -5,7 +5,7 @@ open FSharpLint.Rules
 
 [<TestFixture>]
 type TestMaxNumberOfMembers() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxNumberOfMembers.rule { MaxItems = 5 })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxNumberOfMembers.rule (Some { MaxItems = Some 5 }))
 
     [<Test>]
     member this.SixClassProperties() =

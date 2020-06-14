@@ -5,7 +5,7 @@ open FSharpLint.Rules
 
 [<TestFixture>]
 type TestMaxNumberOfItemsInTuple() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxNumberOfItemsInTuple.rule { MaxItems = 5 })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxNumberOfItemsInTuple.rule (Some { MaxItems = Some 5 }))
 
     [<Test>]
     member this.SixTupleItemsExpressionConstructor() =

@@ -8,7 +8,19 @@ open FSharpLint.Framework.Ast
 open FSharpLint.Framework.Rules
 
 [<RequireQualifiedAccess>]
-type Config = { Depth:int }
+type ConfigDto = { Depth:int option }
+
+type private Config = { Depth:int }
+with
+    static member Default = {
+        Depth = 8
+    }
+
+let private configOfDto (dto:ConfigDto option) =
+    dto
+    |> Option.map (fun dto ->
+        { Depth = dto.Depth |> Option.defaultValue Config.Default.Depth })
+    |> Option.defaultValue Config.Default
 
 let private error (depth:int) =
     let errorFormatString = Resources.GetString("RulesNestedStatementsError")
@@ -91,7 +103,7 @@ let decrementDepthToCommonParent args i j =
 
 let mutable skipToIndex = None
 
-let runner (config:Config) (args:AstNodeRuleParams) =
+let private runner (config:Config) (args:AstNodeRuleParams) =
     let skip =
         match skipToIndex with
         | Some skipTo when skipTo = args.NodeIndex ->
@@ -130,9 +142,8 @@ let cleanup () =
     depth <- 0
     skipToIndex <- None
 
-let rule config =
+let rule (config:ConfigDto option) =
     { Name = "NestedStatements"
       Identifier = Identifiers.NestedStatements
-      RuleConfig = { AstNodeRuleConfig.Runner = runner config
-                     Cleanup = cleanup } }
+      RuleConfig = { AstNodeRuleConfig.Runner = runner (configOfDto config); Cleanup = cleanup } }
     |> AstNodeRule

@@ -6,7 +6,7 @@ open FSharpLint.Rules.NestedStatements
 
 [<TestFixture>]
 type TestConventionsNestedStatements() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(NestedStatements.rule { Config.Depth = 5 })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(NestedStatements.rule (Some { ConfigDto.Depth = Some 5 }))
 
     [<Test>]
     member this.NestedTooDeep() =

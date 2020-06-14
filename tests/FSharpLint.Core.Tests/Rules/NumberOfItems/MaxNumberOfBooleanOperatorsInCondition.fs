@@ -5,7 +5,7 @@ open FSharpLint.Rules
 
 [<TestFixture>]
 type TestMaxNumberOfBooleanOperatorsInCondition() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxNumberOfBooleanOperatorsInCondition.rule { MaxItems = 4 })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxNumberOfBooleanOperatorsInCondition.rule (Some { MaxItems = Some 4 }))
 
     [<Test>]
     member this.FourBooleanOperators() =
