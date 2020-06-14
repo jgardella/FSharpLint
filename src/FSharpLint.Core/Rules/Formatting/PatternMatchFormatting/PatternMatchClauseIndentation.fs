@@ -9,9 +9,21 @@ open FSharpLint.Framework.Rules
 open FSharpLint.Rules.Helper
 
 [<RequireQualifiedAccess>]
-type Config = { AllowSingleLineLambda:bool }
+type ConfigDto = { AllowSingleLineLambda:bool option }
 
-let check (config:Config) (args:AstNodeRuleParams) matchExprRange (clauses:SynMatchClause list) isLambda =
+type private Config = { AllowSingleLineLambda:bool }
+with
+    static member Default = {
+        AllowSingleLineLambda = false
+    }
+
+let private configOfDto (dto:ConfigDto option) =
+    dto
+    |> Option.map (fun dto ->
+        { AllowSingleLineLambda = dto.AllowSingleLineLambda |> Option.defaultValue Config.Default.AllowSingleLineLambda })
+    |> Option.defaultValue Config.Default
+
+let private check (config:Config) (args:AstNodeRuleParams) matchExprRange (clauses:SynMatchClause list) isLambda =
     let matchStartIndentation = ExpressionUtilities.getLeadingSpaces matchExprRange args.FileContent
 
     let indentationLevelError =
@@ -58,10 +70,10 @@ let check (config:Config) (args:AstNodeRuleParams) matchExprRange (clauses:SynMa
     |]
     |> Array.concat
 
-let runner (config:Config) (args:AstNodeRuleParams) = PatternMatchFormatting.isActualPatternMatch args (check config)
+let private runner (config:Config) (args:AstNodeRuleParams) = PatternMatchFormatting.isActualPatternMatch args (check config)
 
-let rule config =
+let rule (config:ConfigDto option) =
     { Name = "PatternMatchClauseIndentation"
       Identifier = Identifiers.PatternMatchClauseIndentation
-      RuleConfig = { AstNodeRuleConfig.Runner = runner config; Cleanup = ignore } }
+      RuleConfig = { AstNodeRuleConfig.Runner = runner (configOfDto config); Cleanup = ignore } }
     |> AstNodeRule

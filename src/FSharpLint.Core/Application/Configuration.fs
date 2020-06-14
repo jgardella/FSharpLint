@@ -152,7 +152,7 @@ with
 type PatternMatchFormattingConfig =
     { patternMatchClausesOnNewLine:EnabledConfig option
       patternMatchOrClausesOnNewLine:EnabledConfig option
-      patternMatchClauseIndentation:RuleConfig<PatternMatchClauseIndentation.Config> option
+      patternMatchClauseIndentation:RuleConfig<PatternMatchClauseIndentation.ConfigDto option> option
       patternMatchExpressionIndentation:EnabledConfig option }
 with
     member this.Flatten() =
@@ -369,7 +369,7 @@ type Configuration =
       TupleParentheses:EnabledConfig option
       PatternMatchClausesOnNewLine:EnabledConfig option
       PatternMatchOrClausesOnNewLine:EnabledConfig option
-      PatternMatchClauseIndentation:RuleConfig<PatternMatchClauseIndentation.Config> option
+      PatternMatchClauseIndentation:RuleConfig<PatternMatchClauseIndentation.ConfigDto option> option
       PatternMatchExpressionIndentation:EnabledConfig option
       RecursiveAsyncFunction:EnabledConfig option
       RedundantNewKeyword:EnabledConfig option
