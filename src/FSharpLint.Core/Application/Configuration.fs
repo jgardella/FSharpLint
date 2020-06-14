@@ -323,7 +323,7 @@ type TypographyConfig =
     { indentation:EnabledConfig option
       maxCharactersOnLine:RuleConfig<MaxCharactersOnLine.ConfigDto option> option
       trailingWhitespaceOnLine:RuleConfig<TrailingWhitespaceOnLine.ConfigDto option> option
-      maxLinesInFile:RuleConfig<MaxLinesInFile.Config> option
+      maxLinesInFile:RuleConfig<MaxLinesInFile.ConfigDto option> option
       trailingNewLineInFile:EnabledConfig option
       noTabCharacters:EnabledConfig option }
 with
@@ -420,7 +420,7 @@ type Configuration =
       Indentation:EnabledConfig option
       MaxCharactersOnLine:RuleConfig<MaxCharactersOnLine.ConfigDto option> option
       TrailingWhitespaceOnLine:RuleConfig<TrailingWhitespaceOnLine.ConfigDto option> option
-      MaxLinesInFile:RuleConfig<MaxLinesInFile.Config> option
+      MaxLinesInFile:RuleConfig<MaxLinesInFile.ConfigDto option> option
       TrailingNewLineInFile:EnabledConfig option
       NoTabCharacters:EnabledConfig option }
 with
