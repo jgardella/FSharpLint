@@ -9,7 +9,7 @@ let generateNewLines numNewLines = Array.create numNewLines "\n" |> String.conca
 let FunctionLength = 70
 [<TestFixture>]
 type TestMaxLinesInFunction() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInFunction.rule { Config.MaxLines = FunctionLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInFunction.rule (Some { ConfigDto.MaxLines = Some FunctionLength }))
 
     [<Test>]
     member this.FunctionTooManyLines() =
@@ -34,7 +34,7 @@ let dog x =
 let LambdaFunctionLength = 5
 [<TestFixture>]
 type TestMaxLinesInLambdaFunction() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInLambdaFunction.rule { Config.MaxLines = LambdaFunctionLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInLambdaFunction.rule (Some { ConfigDto.MaxLines = Some LambdaFunctionLength }))
 
     [<Test>]
     member this.LambdaFunctionTooManyLines() =
@@ -81,7 +81,7 @@ let dog = fun x ->
 let MatchLambdaFunctionLength = 70
 [<TestFixture>]
 type TestMaxLinesInMatchLambdaFunction() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInMatchLambdaFunction.rule { Config.MaxLines = MatchLambdaFunctionLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInMatchLambdaFunction.rule (Some { ConfigDto.MaxLines = Some MatchLambdaFunctionLength }))
 
     [<Test>]
     member this.MatchFunctionTooManyLines() =
@@ -110,7 +110,7 @@ let dog = function
 let ValueLength = 70
 [<TestFixture>]
 type TestMaxLinesInValue() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInValue.rule { Config.MaxLines = ValueLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInValue.rule (Some { ConfigDto.MaxLines = Some ValueLength }))
 
     [<Test>]
     member this.ValueTooManyLines() =
@@ -135,7 +135,7 @@ let dog =
 let ConstructorLength = 70
 [<TestFixture>]
 type TestMaxLinesInConstructor() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInConstructor.rule { Config.MaxLines = ConstructorLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInConstructor.rule (Some { ConfigDto.MaxLines = Some ConstructorLength }))
 
     [<Test>]
     member this.ConstructorTooManyLines() =
@@ -159,13 +159,13 @@ type MyClass(x) =
 let MemberLength = 70
 [<TestFixture>]
 type TestMaxLinesInMember() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInMember.rule { Config.MaxLines = MemberLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInMember.rule (Some { ConfigDto.MaxLines = Some MemberLength }))
     // TODO: Add tests.
 
 let PropertyLength = 70
 [<TestFixture>]
 type TestMaxLinesInProperty() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInProperty.rule { Config.MaxLines = PropertyLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInProperty.rule (Some { ConfigDto.MaxLines = Some PropertyLength }))
 
     [<Test>]
     member this.PropertyNotTooManyLines() =
@@ -180,7 +180,7 @@ module Program
 let ClassLength = 500
 [<TestFixture>]
 type TestMaxLinesInClass() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInClass.rule { Config.MaxLines = ClassLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInClass.rule (Some { ConfigDto.MaxLines = Some ClassLength }))
 
     [<Test>]
     member this.ClassTooManyLines() =
@@ -219,13 +219,13 @@ module Program
 let UnionLength = 500
 [<TestFixture>]
 type TestMaxLinesInUnion() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInUnion.rule { Config.MaxLines = UnionLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInUnion.rule (Some { ConfigDto.MaxLines = Some UnionLength }))
     // TODO: Add tests.
 
 let RecordLength = 500
 [<TestFixture>]
 type TestMaxLinesInRecord() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInRecord.rule { Config.MaxLines = RecordLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInRecord.rule (Some { ConfigDto.MaxLines = Some RecordLength }))
 
     [<Test>]
     member this.RecordTooManyLines() =
@@ -248,13 +248,13 @@ module Program
 let EnumLength = 1000
 [<TestFixture>]
 type TestMaxLinesInEnum() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInEnum.rule { Config.MaxLines = EnumLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInEnum.rule (Some { ConfigDto.MaxLines = Some EnumLength }))
     // TODO: Add tests.
 
 let ModuleLength = 1000
 [<TestFixture>]
 type TestMaxLinesInModule() =
-    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInModule.rule { Config.MaxLines = ModuleLength })
+    inherit TestAstNodeRuleBase.TestAstNodeRuleBase(MaxLinesInModule.rule (Some { ConfigDto.MaxLines = Some ModuleLength }))
 
     [<Test>]
     member this.ModuleTooManyLines() =

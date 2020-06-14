@@ -4,8 +4,11 @@ open FSharp.Compiler.SyntaxTree
 open FSharpLint.Framework.Ast
 open FSharpLint.Framework.AstInfo
 open FSharpLint.Framework.Rules
+open FSharpLint.Rules.Helper.SourceLength
 
-let runner (config:Helper.SourceLength.Config) (args:AstNodeRuleParams) =
+let [<Literal>] private DefaultMaxLinesInMember = 100
+
+let private runner (config:Helper.SourceLength.Config) (args:AstNodeRuleParams) =
     match args.AstNode with
     | AstNode.Binding(SynBinding.Binding(_, _, _, _, _, _, valData, _, _, _, _, _) as binding) ->
         match identifierTypeFromValData valData with
@@ -13,8 +16,8 @@ let runner (config:Helper.SourceLength.Config) (args:AstNodeRuleParams) =
         | _ -> Array.empty
     | _ -> Array.empty
 
-let rule config =
+let rule (config:ConfigDto option) =
     { Name = "MaxLinesInMember"
       Identifier = Identifiers.MaxLinesInMember
-      RuleConfig = { AstNodeRuleConfig.Runner = runner config; Cleanup = ignore } }
+      RuleConfig = { AstNodeRuleConfig.Runner = runner (configOfDto DefaultMaxLinesInMember config); Cleanup = ignore } }
     |> AstNodeRule

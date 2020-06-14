@@ -200,18 +200,18 @@ with
         |] |> Array.concat
 
 type SourceLengthConfig =
-    { maxLinesInLambdaFunction:RuleConfig<Helper.SourceLength.Config> option
-      maxLinesInMatchLambdaFunction:RuleConfig<Helper.SourceLength.Config> option
-      maxLinesInValue:RuleConfig<Helper.SourceLength.Config> option
-      maxLinesInFunction:RuleConfig<Helper.SourceLength.Config> option
-      maxLinesInMember:RuleConfig<Helper.SourceLength.Config> option
-      maxLinesInConstructor:RuleConfig<Helper.SourceLength.Config> option
-      maxLinesInProperty:RuleConfig<Helper.SourceLength.Config> option
-      maxLinesInModule:RuleConfig<Helper.SourceLength.Config> option
-      maxLinesInRecord:RuleConfig<Helper.SourceLength.Config> option
-      maxLinesInEnum:RuleConfig<Helper.SourceLength.Config> option
-      maxLinesInUnion:RuleConfig<Helper.SourceLength.Config> option
-      maxLinesInClass:RuleConfig<Helper.SourceLength.Config> option }
+    { maxLinesInLambdaFunction:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      maxLinesInMatchLambdaFunction:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      maxLinesInValue:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      maxLinesInFunction:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      maxLinesInMember:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      maxLinesInConstructor:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      maxLinesInProperty:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      maxLinesInModule:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      maxLinesInRecord:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      maxLinesInEnum:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      maxLinesInUnion:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      maxLinesInClass:RuleConfig<Helper.SourceLength.ConfigDto option> option }
 with
     member this.Flatten() =
         [|
@@ -382,18 +382,18 @@ type Configuration =
       InvalidOpWithSingleArgument:EnabledConfig option
       InvalidArgWithTwoArguments:EnabledConfig option
       FailwithfWithArgumentsMatchingFormatString:EnabledConfig option
-      MaxLinesInLambdaFunction:RuleConfig<Helper.SourceLength.Config> option
-      MaxLinesInMatchLambdaFunction:RuleConfig<Helper.SourceLength.Config> option
-      MaxLinesInValue:RuleConfig<Helper.SourceLength.Config> option
-      MaxLinesInFunction:RuleConfig<Helper.SourceLength.Config> option
-      MaxLinesInMember:RuleConfig<Helper.SourceLength.Config> option
-      MaxLinesInConstructor:RuleConfig<Helper.SourceLength.Config> option
-      MaxLinesInProperty:RuleConfig<Helper.SourceLength.Config> option
-      MaxLinesInModule:RuleConfig<Helper.SourceLength.Config> option
-      MaxLinesInRecord:RuleConfig<Helper.SourceLength.Config> option
-      MaxLinesInEnum:RuleConfig<Helper.SourceLength.Config> option
-      MaxLinesInUnion:RuleConfig<Helper.SourceLength.Config> option
-      MaxLinesInClass:RuleConfig<Helper.SourceLength.Config> option
+      MaxLinesInLambdaFunction:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      MaxLinesInMatchLambdaFunction:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      MaxLinesInValue:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      MaxLinesInFunction:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      MaxLinesInMember:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      MaxLinesInConstructor:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      MaxLinesInProperty:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      MaxLinesInModule:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      MaxLinesInRecord:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      MaxLinesInEnum:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      MaxLinesInUnion:RuleConfig<Helper.SourceLength.ConfigDto option> option
+      MaxLinesInClass:RuleConfig<Helper.SourceLength.ConfigDto option> option
       InterfaceNames:RuleConfig<NamingConfig> option
       ExceptionNames:RuleConfig<NamingConfig> option
       TypeNames:RuleConfig<NamingConfig> option
