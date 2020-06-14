@@ -14,7 +14,19 @@ type TypedItemStyle =
     | SpacesAround = 2
 
 [<RequireQualifiedAccess>]
-type Config = { TypedItemStyle:TypedItemStyle }
+type ConfigDto = { TypedItemStyle:TypedItemStyle option }
+
+type private Config = { TypedItemStyle:TypedItemStyle }
+with
+    static member Default = {
+        TypedItemStyle = TypedItemStyle.SpacesAround
+    }
+
+let private configOfDto (dto:ConfigDto option) =
+    dto
+    |> Option.map (fun dto ->
+        { TypedItemStyle = dto.TypedItemStyle |> Option.defaultValue Config.Default.TypedItemStyle })
+    |> Option.defaultValue Config.Default
 
 let private getLeadingSpaces (s:string) =
     let rec loop i =
@@ -69,7 +81,7 @@ let private checkRange (config:Config) (args:AstNodeRuleParams) (range:range) =
         | _ -> None)
 
 /// Checks for correct spacing around colon of a typed item.
-let runner (config:Config) (args:AstNodeRuleParams) =
+let private runner (config:Config) (args:AstNodeRuleParams) =
     match args.AstNode with
     | AstNode.Pattern (SynPat.Typed (range=range))
     | AstNode.Field (SynField.Field (range=range)) ->
@@ -78,8 +90,8 @@ let runner (config:Config) (args:AstNodeRuleParams) =
         checkRange config args range |> Option.toArray
     | _ -> [||]
 
-let rule config =
+let rule (config:ConfigDto option) =
     { Name = "TypedItemSpacing"
       Identifier = Identifiers.TypedItemSpacing
-      RuleConfig = { AstNodeRuleConfig.Runner = runner config; Cleanup = ignore } }
+      RuleConfig = { AstNodeRuleConfig.Runner = runner (configOfDto config); Cleanup = ignore } }
     |> AstNodeRule

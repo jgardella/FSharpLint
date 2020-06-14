@@ -164,7 +164,7 @@ with
         |] |> Array.choose id
 
 type FormattingConfig =
-    { typedItemSpacing:RuleConfig<TypedItemSpacing.Config> option
+    { typedItemSpacing:RuleConfig<TypedItemSpacing.ConfigDto option> option
       typePrefixing:EnabledConfig option
       unionDefinitionIndentation:EnabledConfig option
       moduleDeclSpacing:EnabledConfig option
@@ -359,7 +359,7 @@ type Configuration =
       typography:TypographyConfig option
       ignoreFiles:string [] option
       Hints:HintConfig option
-      TypedItemSpacing:RuleConfig<TypedItemSpacing.Config> option
+      TypedItemSpacing:RuleConfig<TypedItemSpacing.ConfigDto option> option
       TypePrefixing:EnabledConfig option
       UnionDefinitionIndentation:EnabledConfig option
       ModuleDeclSpacing:EnabledConfig option
