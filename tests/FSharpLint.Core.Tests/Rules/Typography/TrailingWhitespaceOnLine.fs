@@ -7,7 +7,12 @@ open FSharpLint.Rules
 
 [<TestFixture>]
 type SingleSpaceOnEndOfLineAfterOperatorWithConfigPropertyOn() =
-    inherit TestLineRuleBase.TestLineRuleBase(TrailingWhitespaceOnLine.rule { NumberOfSpacesAllowed = 0; OneSpaceAllowedAfterOperator = true; IgnoreBlankLines = false })
+    inherit TestLineRuleBase.TestLineRuleBase(
+        TrailingWhitespaceOnLine.rule (Some {
+            TrailingWhitespaceOnLine.ConfigDto.NumberOfSpacesAllowed = Some 0
+            TrailingWhitespaceOnLine.ConfigDto.OneSpaceAllowedAfterOperator = Some true
+            TrailingWhitespaceOnLine.ConfigDto.IgnoreBlankLines = Some false
+        }))
 
     [<Test>]
     member this.SingleSpaceOnEndOfLineAfterOperatorWithConfigPropertyOn() =
@@ -17,7 +22,12 @@ type SingleSpaceOnEndOfLineAfterOperatorWithConfigPropertyOn() =
 
 [<TestFixture>]
 type SingleSpaceOnEndOfLineAfterOperatorWithConfigPropertyOff() =
-    inherit TestLineRuleBase.TestLineRuleBase(TrailingWhitespaceOnLine.rule { NumberOfSpacesAllowed = 0; OneSpaceAllowedAfterOperator = false; IgnoreBlankLines = false })
+    inherit TestLineRuleBase.TestLineRuleBase(
+        TrailingWhitespaceOnLine.rule (Some {
+            TrailingWhitespaceOnLine.ConfigDto.NumberOfSpacesAllowed = Some 0
+            TrailingWhitespaceOnLine.ConfigDto.OneSpaceAllowedAfterOperator = Some false
+            TrailingWhitespaceOnLine.ConfigDto.IgnoreBlankLines = Some false
+        }))
 
     [<Test>]
     member this.SingleSpaceOnEndOfLineAfterOperatorWithConfigPropertyOff() =
@@ -46,7 +56,12 @@ type SingleSpaceOnEndOfLineAfterOperatorWithConfigPropertyOff() =
 
 [<TestFixture>]
 type MultipleSpacesOnEndOfLineAfterOperatorWithConfigPropertyOn() =
-    inherit TestLineRuleBase.TestLineRuleBase(TrailingWhitespaceOnLine.rule { NumberOfSpacesAllowed = 0; OneSpaceAllowedAfterOperator = true; IgnoreBlankLines = false })
+    inherit TestLineRuleBase.TestLineRuleBase(
+        TrailingWhitespaceOnLine.rule (Some {
+            TrailingWhitespaceOnLine.ConfigDto.NumberOfSpacesAllowed = Some 0
+            TrailingWhitespaceOnLine.ConfigDto.OneSpaceAllowedAfterOperator = Some true
+            TrailingWhitespaceOnLine.ConfigDto.IgnoreBlankLines = Some false
+        }))
 
     [<Test>]
     member this.MultipleSpacesOnEndOfLineAfterOperatorWithConfigPropertyOn() =
@@ -56,7 +71,12 @@ type MultipleSpacesOnEndOfLineAfterOperatorWithConfigPropertyOn() =
 
 [<TestFixture>]
 type TestOneSpace() =
-    inherit TestLineRuleBase.TestLineRuleBase(TrailingWhitespaceOnLine.rule { NumberOfSpacesAllowed = 1; OneSpaceAllowedAfterOperator = false; IgnoreBlankLines = false })
+    inherit TestLineRuleBase.TestLineRuleBase(
+        TrailingWhitespaceOnLine.rule (Some {
+            TrailingWhitespaceOnLine.ConfigDto.NumberOfSpacesAllowed = Some 1
+            TrailingWhitespaceOnLine.ConfigDto.OneSpaceAllowedAfterOperator = Some false
+            TrailingWhitespaceOnLine.ConfigDto.IgnoreBlankLines = Some false
+        }))
 
     [<Test>]
     member this.OneSpaceOnEndOfLineWithOneSpaceAllowed() =
@@ -73,7 +93,12 @@ type TestOneSpace() =
 
 [<TestFixture>]
 type TwoSpacesOnEndOfLineWithTwoSpacesAllowed() =
-    inherit TestLineRuleBase.TestLineRuleBase(TrailingWhitespaceOnLine.rule { NumberOfSpacesAllowed = 2; OneSpaceAllowedAfterOperator = false; IgnoreBlankLines = false })
+    inherit TestLineRuleBase.TestLineRuleBase(
+        TrailingWhitespaceOnLine.rule (Some {
+            TrailingWhitespaceOnLine.ConfigDto.NumberOfSpacesAllowed = Some 2
+            TrailingWhitespaceOnLine.ConfigDto.OneSpaceAllowedAfterOperator = Some false
+            TrailingWhitespaceOnLine.ConfigDto.IgnoreBlankLines = Some false
+        }))
 
     [<Test>]
     member this.TwoSpacesOnEndOfLineWithTwoSpacesAllowed() =
@@ -85,7 +110,12 @@ type TwoSpacesOnEndOfLineWithTwoSpacesAllowed() =
 
 [<TestFixture>]
 type WhitespaceEntireLine() =
-    inherit TestLineRuleBase.TestLineRuleBase(TrailingWhitespaceOnLine.rule { NumberOfSpacesAllowed = 0; OneSpaceAllowedAfterOperator = false; IgnoreBlankLines = false })
+    inherit TestLineRuleBase.TestLineRuleBase(
+        TrailingWhitespaceOnLine.rule (Some {
+            TrailingWhitespaceOnLine.ConfigDto.NumberOfSpacesAllowed = Some 0
+            TrailingWhitespaceOnLine.ConfigDto.OneSpaceAllowedAfterOperator = Some false
+            TrailingWhitespaceOnLine.ConfigDto.IgnoreBlankLines = Some false
+        }))
 
     [<Test>]
     member this.WhitespaceEntireLine() =
@@ -95,7 +125,12 @@ type WhitespaceEntireLine() =
 
 [<TestFixture>]
 type WhitespaceEntireLineIgnoreBlankLines() =
-    inherit TestLineRuleBase.TestLineRuleBase(TrailingWhitespaceOnLine.rule { NumberOfSpacesAllowed = 0; OneSpaceAllowedAfterOperator = false; IgnoreBlankLines = true })
+    inherit TestLineRuleBase.TestLineRuleBase(
+        TrailingWhitespaceOnLine.rule (Some {
+            TrailingWhitespaceOnLine.ConfigDto.NumberOfSpacesAllowed = Some 0
+            TrailingWhitespaceOnLine.ConfigDto.OneSpaceAllowedAfterOperator = Some false
+            TrailingWhitespaceOnLine.ConfigDto.IgnoreBlankLines = Some true
+        }))
 
     [<Test>]
     member this.WhitespaceEntireLineIgnoreBlankLines() =

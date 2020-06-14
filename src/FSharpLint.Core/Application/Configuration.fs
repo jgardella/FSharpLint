@@ -322,7 +322,7 @@ with
 type TypographyConfig =
     { indentation:EnabledConfig option
       maxCharactersOnLine:RuleConfig<MaxCharactersOnLine.Config> option
-      trailingWhitespaceOnLine:RuleConfig<TrailingWhitespaceOnLine.Config> option
+      trailingWhitespaceOnLine:RuleConfig<TrailingWhitespaceOnLine.ConfigDto option> option
       maxLinesInFile:RuleConfig<MaxLinesInFile.Config> option
       trailingNewLineInFile:EnabledConfig option
       noTabCharacters:EnabledConfig option }
@@ -419,7 +419,7 @@ type Configuration =
       TupleOfWildcards:EnabledConfig option
       Indentation:EnabledConfig option
       MaxCharactersOnLine:RuleConfig<MaxCharactersOnLine.Config> option
-      TrailingWhitespaceOnLine:RuleConfig<TrailingWhitespaceOnLine.Config> option
+      TrailingWhitespaceOnLine:RuleConfig<TrailingWhitespaceOnLine.ConfigDto option> option
       MaxLinesInFile:RuleConfig<MaxLinesInFile.Config> option
       TrailingNewLineInFile:EnabledConfig option
       NoTabCharacters:EnabledConfig option }

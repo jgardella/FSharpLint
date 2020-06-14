@@ -7,10 +7,29 @@ open FSharpLint.Framework.Rules
 open FSharp.Compiler.Range
 
 [<RequireQualifiedAccess>]
-type Config =
+type ConfigDto =
+    { NumberOfSpacesAllowed:int option
+      OneSpaceAllowedAfterOperator:bool option
+      IgnoreBlankLines:bool option }
+
+type private Config =
     { NumberOfSpacesAllowed:int
       OneSpaceAllowedAfterOperator:bool
       IgnoreBlankLines:bool }
+with
+    static member Default = {
+       NumberOfSpacesAllowed = 1
+       OneSpaceAllowedAfterOperator = true
+       IgnoreBlankLines = true
+    }
+
+let private configOfDto (dto:ConfigDto option) =
+    dto
+    |> Option.map (fun dto ->
+        { Config.NumberOfSpacesAllowed = dto.NumberOfSpacesAllowed |> Option.defaultValue Config.Default.NumberOfSpacesAllowed
+          OneSpaceAllowedAfterOperator = dto.OneSpaceAllowedAfterOperator |> Option.defaultValue Config.Default.OneSpaceAllowedAfterOperator
+          IgnoreBlankLines = dto.OneSpaceAllowedAfterOperator |> Option.defaultValue Config.Default.IgnoreBlankLines })
+    |> Option.defaultValue Config.Default
 
 let private isSymbol character =
     let symbols =
@@ -35,7 +54,7 @@ let private doesStringNotEndWithWhitespace (config:Config) (str:string) =
 
 let private lengthOfWhitespaceOnEnd (str:string) = str.Length - str.TrimEnd().Length
 
-let checkTrailingWhitespaceOnLine (config:Config) (args:LineRuleParams) =
+let private checkTrailingWhitespaceOnLine (config:Config) (args:LineRuleParams) =
     let line = args.Line
     let lineNumber = args.LineNumber
     let ignoringBlankLinesAndIsBlankLine = config.IgnoreBlankLines && System.String.IsNullOrWhiteSpace(line)
@@ -54,8 +73,8 @@ let checkTrailingWhitespaceOnLine (config:Config) (args:LineRuleParams) =
     else
         Array.empty
 
-let rule config =
+let rule (config:ConfigDto option) =
     { Name = "TrailingWhitespaceOnLine"
       Identifier = Identifiers.TrailingWhitespaceOnLine
-      RuleConfig = { LineRuleConfig.Runner = checkTrailingWhitespaceOnLine config } }
+      RuleConfig = { LineRuleConfig.Runner = checkTrailingWhitespaceOnLine (configOfDto config) } }
     |> LineRule
