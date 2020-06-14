@@ -7,9 +7,21 @@ open FSharpLint.Framework.Rules
 open FSharp.Compiler.Range
 
 [<RequireQualifiedAccess>]
-type Config = { MaxCharactersOnLine:int }
+type ConfigDto = { MaxCharactersOnLine:int option }
 
-let checkMaxCharactersOnLine (config:Config) (args:LineRuleParams) =
+type private Config = { MaxCharactersOnLine:int }
+with
+    static member Default = {
+        MaxCharactersOnLine = 120
+    }
+
+let private configOfDto (dto:ConfigDto option) =
+    dto
+    |> Option.map (fun dto ->
+        { Config.MaxCharactersOnLine = dto.MaxCharactersOnLine |> Option.defaultValue Config.Default.MaxCharactersOnLine })
+    |> Option.defaultValue Config.Default
+
+let private checkMaxCharactersOnLine (config:Config) (args:LineRuleParams) =
     let maxCharacters = config.MaxCharactersOnLine
     let lineLength = String.length args.Line
     if lineLength > maxCharacters then
@@ -22,8 +34,8 @@ let checkMaxCharactersOnLine (config:Config) (args:LineRuleParams) =
     else
         Array.empty
 
-let rule config =
+let rule (config:ConfigDto option) =
     { Name = "MaxCharactersOnLine"
       Identifier = Identifiers.MaxCharactersOnLine
-      RuleConfig = { LineRuleConfig.Runner = checkMaxCharactersOnLine config } }
+      RuleConfig = { LineRuleConfig.Runner = checkMaxCharactersOnLine (configOfDto config) } }
     |> LineRule

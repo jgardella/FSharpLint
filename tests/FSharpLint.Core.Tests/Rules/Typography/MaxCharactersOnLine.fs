@@ -5,7 +5,7 @@ open FSharpLint.Rules
 
 [<TestFixture>]
 type TestTypographyMaxCharactersOnLine() =
-    inherit TestLineRuleBase.TestLineRuleBase(MaxCharactersOnLine.rule { MaxCharactersOnLine = 60 })
+    inherit TestLineRuleBase.TestLineRuleBase(MaxCharactersOnLine.rule (Some { MaxCharactersOnLine = Some 60 }))
 
     [<Test>]
     member this.TooManyCharactersOnLine() =
