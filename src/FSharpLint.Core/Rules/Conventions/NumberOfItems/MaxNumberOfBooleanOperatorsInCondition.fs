@@ -6,6 +6,9 @@ open FSharpLint.Framework.Suggestion
 open FSharp.Compiler.SyntaxTree
 open FSharpLint.Framework.Ast
 open FSharpLint.Framework.Rules
+open FSharpLint.Rules.Helper.NumberOfItems
+
+let [<Literal>] private DefaultMaxBoolOperators = 4
 
 let private boolFunctions =
     Set.ofList ["op_BooleanOr"; "op_BooleanAnd"; "not"]
@@ -56,8 +59,8 @@ let private runner (config:Helper.NumberOfItems.Config) (args:AstNodeRuleParams)
         validateCondition config.MaxItems whenExpr
     | _ -> Array.empty
 
-let rule config =
+let rule (config:ConfigDto option) =
     { Name = "MaxNumberOfBooleanOperatorsInCondition"
       Identifier = Identifiers.MaxNumberOfBooleanOperatorsInCondition
-      RuleConfig = { AstNodeRuleConfig.Runner = runner config; Cleanup = ignore } }
+      RuleConfig = { AstNodeRuleConfig.Runner = runner (configOfDto DefaultMaxBoolOperators config); Cleanup = ignore } }
     |> AstNodeRule

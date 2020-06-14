@@ -6,6 +6,9 @@ open FSharpLint.Framework.Suggestion
 open FSharp.Compiler.SyntaxTree
 open FSharpLint.Framework.Ast
 open FSharpLint.Framework.Rules
+open FSharpLint.Rules.Helper.NumberOfItems
+
+let [<Literal>] private DefaultMaxFunctionParams = 5
 
 let private validateFunction (maxParameters:int) (constructorArguments:SynArgPats) =
     match constructorArguments with
@@ -22,8 +25,8 @@ let private runner (config:Helper.NumberOfItems.Config) (args:AstNodeRuleParams)
         validateFunction config.MaxItems constructorArguments
     | _ -> Array.empty
 
-let rule config =
+let rule (config:ConfigDto option) =
     { Name = "MaxNumberOfFunctionParameters"
       Identifier = Identifiers.MaxNumberOfFunctionParameters
-      RuleConfig = { AstNodeRuleConfig.Runner = runner config; Cleanup = ignore } }
+      RuleConfig = { AstNodeRuleConfig.Runner = runner (configOfDto DefaultMaxFunctionParams config); Cleanup = ignore } }
     |> AstNodeRule

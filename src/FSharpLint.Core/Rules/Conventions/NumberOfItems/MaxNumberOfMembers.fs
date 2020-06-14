@@ -6,6 +6,9 @@ open FSharpLint.Framework.Suggestion
 open FSharp.Compiler.SyntaxTree
 open FSharpLint.Framework.Ast
 open FSharpLint.Framework.Rules
+open FSharpLint.Rules.Helper.NumberOfItems
+
+let [<Literal>] private DefaultMaxMembers = 32
 
 let private getMembers (members:SynMemberDefn list) =
     let isPublic = function
@@ -41,8 +44,8 @@ let private runner (config:Helper.NumberOfItems.Config) (args:AstNodeRuleParams)
         validateType config.MaxItems members typeRepresentation
     | _ -> Array.empty
 
-let rule config =
+let rule (config:ConfigDto option) =
     { Name = "MaxNumberOfMembers"
       Identifier = Identifiers.MaxNumberOfMembers
-      RuleConfig = { AstNodeRuleConfig.Runner = runner config; Cleanup = ignore } }
+      RuleConfig = { AstNodeRuleConfig.Runner = runner (configOfDto DefaultMaxMembers config); Cleanup = ignore } }
     |> AstNodeRule

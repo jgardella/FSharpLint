@@ -266,10 +266,10 @@ with
         |] |> Array.concat
 
 type NumberOfItemsConfig =
-    { maxNumberOfItemsInTuple:RuleConfig<Helper.NumberOfItems.Config> option
-      maxNumberOfFunctionParameters:RuleConfig<Helper.NumberOfItems.Config> option
-      maxNumberOfMembers:RuleConfig<Helper.NumberOfItems.Config> option
-      maxNumberOfBooleanOperatorsInCondition:RuleConfig<Helper.NumberOfItems.Config> option }
+    { maxNumberOfItemsInTuple:RuleConfig<Helper.NumberOfItems.ConfigDto option> option
+      maxNumberOfFunctionParameters:RuleConfig<Helper.NumberOfItems.ConfigDto option> option
+      maxNumberOfMembers:RuleConfig<Helper.NumberOfItems.ConfigDto option> option
+      maxNumberOfBooleanOperatorsInCondition:RuleConfig<Helper.NumberOfItems.ConfigDto option> option }
 with
     member this.Flatten() =
         [|
@@ -409,10 +409,10 @@ type Configuration =
       ActivePatternNames:RuleConfig<NamingConfig> option
       PublicValuesNames:RuleConfig<NamingConfig> option
       NonPublicValuesNames:RuleConfig<NamingConfig> option
-      MaxNumberOfItemsInTuple:RuleConfig<Helper.NumberOfItems.Config> option
-      MaxNumberOfFunctionParameters:RuleConfig<Helper.NumberOfItems.Config> option
-      MaxNumberOfMembers:RuleConfig<Helper.NumberOfItems.Config> option
-      MaxNumberOfBooleanOperatorsInCondition:RuleConfig<Helper.NumberOfItems.Config> option
+      MaxNumberOfItemsInTuple:RuleConfig<Helper.NumberOfItems.ConfigDto option> option
+      MaxNumberOfFunctionParameters:RuleConfig<Helper.NumberOfItems.ConfigDto option> option
+      MaxNumberOfMembers:RuleConfig<Helper.NumberOfItems.ConfigDto option> option
+      MaxNumberOfBooleanOperatorsInCondition:RuleConfig<Helper.NumberOfItems.ConfigDto option> option
       FavourIgnoreOverLetWild:EnabledConfig option
       WildcardNamedWithAsPattern:EnabledConfig option
       UselessBinding:EnabledConfig option

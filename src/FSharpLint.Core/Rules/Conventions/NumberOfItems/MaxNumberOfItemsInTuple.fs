@@ -6,6 +6,9 @@ open FSharpLint.Framework.Suggestion
 open FSharp.Compiler.SyntaxTree
 open FSharpLint.Framework.Ast
 open FSharpLint.Framework.Rules
+open FSharpLint.Rules.Helper.NumberOfItems
+
+let [<Literal>] private DefaultMaxTupleItems = 4
 
 let private isInApplication (syntaxArray:AbstractSyntaxArray.Node[]) i =
     let rec isApplicationNode i =
@@ -28,7 +31,7 @@ let private validateTuple (maxItems:int) (items:SynExpr list) =
     else
         Array.empty
 
-let runner (config:Helper.NumberOfItems.Config) (args:AstNodeRuleParams) =
+let private runner (config:Helper.NumberOfItems.Config) (args:AstNodeRuleParams) =
     match args.AstNode with
     | AstNode.Expression (expression) ->
         match expression with
@@ -38,8 +41,8 @@ let runner (config:Helper.NumberOfItems.Config) (args:AstNodeRuleParams) =
     | _ ->
         Array.empty
 
-let rule config =
+let rule (config:ConfigDto option) =
     { Name = "MaxNumberOfItemsInTuple"
       Identifier = Identifiers.MaxNumberOfItemsInTuple
-      RuleConfig = { AstNodeRuleConfig.Runner = runner config; Cleanup = ignore } }
+      RuleConfig = { AstNodeRuleConfig.Runner = runner (configOfDto DefaultMaxTupleItems config); Cleanup = ignore } }
     |> AstNodeRule
