@@ -1,5 +1,6 @@
 ﻿module FSharpLint.Console.Program
 
+open System.IO
 open Argu
 open System
 open FSharpLint.Framework
@@ -22,12 +23,14 @@ type private FileType =
 type private ToolArgs =
     | [<AltCommandLine("-f")>] Format of OutputFormat
     | [<CliPrefix(CliPrefix.None)>] Lint of ParseResults<LintArgs>
+    | [<CliPrefix(CliPrefix.None)>] Generate_Config of ParseResults<GenerateConfigArgs>
 with
     interface IArgParserTemplate with
         member this.Usage =
             match this with
             | Format _ -> "Output format of the linter."
             | Lint _ -> "Runs FSharpLint against a file or a collection of files."
+            | Generate_Config _ -> "Generates a file containing the default configuration for the linter."
 
 // TODO: investigate erroneous warning on this type definition
 // fsharplint:disable UnionDefinitionIndentation
@@ -43,6 +46,14 @@ with
             | Target _ -> "Input to lint."
             | File_Type _ -> "Input type the linter will run against. If this is not set, the file type will be inferred from the file extension."
             | Lint_Config _ -> "Path to the config for the lint."
+
+and private GenerateConfigArgs =
+    | File of file:string
+with
+    interface IArgParserTemplate with
+        member this.Usage =
+            match this with
+            | File _ -> "File to generate the config in. If this is not set, the config will be generate in `./fsharplint.json`."
 // fsharplint:enable UnionCasesNames
 
 let private parserProgress (output:Output.IOutput) = function
@@ -101,7 +112,6 @@ let private start (arguments:ParseResults<ToolArgs>) =
             | Some configPath -> FromFile configPath
             | None -> Default
 
-
         let lintParams =
             { CancellationToken = None
               ReceivedWarning = Some output.WriteWarning
@@ -125,6 +135,10 @@ let private start (arguments:ParseResults<ToolArgs>) =
             let target = if fileType = FileType.Source then "source" else target
             sprintf "Lint failed while analysing %s.\nFailed with: %s\nStack trace: %s" target e.Message e.StackTrace
             |> handleError
+    | Generate_Config configArgs ->
+        let file = configArgs.TryGetResult File
+        ConfigurationManagement.generateConfig file
+        printfn "Generated default linter config in '%s'" (file |> Option.defaultValue "./fsharplint.json" |> Path.GetFullPath)
     | _ -> ()
 
     exitCode

@@ -1,11 +1,13 @@
 ﻿namespace FSharpLint.FunctionalTest
 
+open FSharpLint.Application
+open FSharpLint.Framework
+
 module TestApi =
 
     open System.IO
     open System.Diagnostics
     open NUnit.Framework
-    open FSharpLint.Application.Lint
     open FSharp.Compiler.SourceCodeServices
     open FSharp.Compiler.Text
 
@@ -100,6 +102,33 @@ module TestApi =
                 Assert.AreEqual(0, warnings.Length)
             | LintResult.Failure err ->
                 Assert.True(false, string err)
+
+        [<Test>]
+        member __.``generateConfig without path generates config in fsharplint.json``() =
+            let expectedConfigFile = TestContext.CurrentContext.TestDirectory </> "fsharplint.json"
+            ConfigurationManagement.generateConfig None
+
+            let generatedConfig =
+                File.ReadAllText expectedConfigFile
+                |> ConfigurationManagement.loadConfigurationFile
+
+            File.Delete expectedConfigFile
+
+            Assert.AreEqual(Configuration.defaultConfiguration, generatedConfig)
+
+        [<Test>]
+        member __.``generateConfig with path generates config in specified path``() =
+            let customPath = "newConfig.json"
+            let expectedConfigFile = TestContext.CurrentContext.TestDirectory </> customPath
+            ConfigurationManagement.generateConfig (Some customPath)
+
+            let generatedConfig =
+                File.ReadAllText expectedConfigFile
+                |> ConfigurationManagement.loadConfigurationFile
+
+            File.Delete expectedConfigFile
+
+            Assert.AreEqual(Configuration.defaultConfiguration, generatedConfig)
 
         [<Test>]
         member __.``Lint solution via absolute path``() =

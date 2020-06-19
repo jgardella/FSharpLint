@@ -507,6 +507,14 @@ let parseConfig (configText:string) =
     with
     | ex -> raise <| ConfigurationException(sprintf "Couldn't parse config, error=%s" ex.Message)
 
+/// Tries to write the config to the provided file.
+let writeConfig (path:string) (config:Configuration) =
+    try
+        let configText = JsonConvert.SerializeObject(config, FSharpJsonConverter.serializerSettings)
+        File.WriteAllText (path, configText)
+    with
+    | ex -> raise <| ConfigurationException(sprintf "Couldn't write config, error=%s" ex.Message)
+
 /// Tries to parse the config file at the provided path.
 let loadConfig (configPath:string) =
     File.ReadAllText configPath

@@ -6,6 +6,14 @@ menu_order: 3
 
 # Rule Configuration
 
+Configuration of the tool is done using JSON.
+A single JSON file containing the default configuration for all rules
+is [included inside of the software](https://github.com/fsprojects/FSharpLint/blob/master/src/FSharpLint.Core/DefaultConfiguration.json).
+If you are using the dotnet tool, you can generate the default configuration using the `generate-config` command, and then modify it as you want.
+
+By default, FSharpLint will try to load the config at `fsharplint.json`. If the file doesn't exist, it will use
+the default configuration. You can override this to point to a different file, for example by using the `--lint-config` flag in the dotnet tool.
+
 ## Global Configuration
 
 In addition to the configuration available for each rule, there are some settings which are defined globally to maintain consistency across

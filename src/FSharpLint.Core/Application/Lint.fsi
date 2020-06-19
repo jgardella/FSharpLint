@@ -10,6 +10,11 @@ module ConfigurationManagement =
     /// Load a FSharpLint configuration file from the contents (string) of the file.
     val loadConfigurationFile : configurationFileText:string -> Configuration
 
+    /// Generate the default FSharp config at the provided path.
+    /// If no path is provided, the config will be generated in the
+    /// current directory in `fsharplint.json`
+    val generateConfig : path : string option -> unit
+
 /// Provides an API for running FSharpLint from within another application.
 [<AutoOpen>]
 module Lint =

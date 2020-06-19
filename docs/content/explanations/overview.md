@@ -91,7 +91,7 @@ Configuration of the tool is done using JSON.
 A single JSON file containing the default configuration for all rules
 is [included inside of the software](https://github.com/fsprojects/FSharpLint/blob/master/src/FSharpLint.Core/DefaultConfiguration.json).
 
-By default, FSharpLint will use the default configuration. You can override this to point
+By default, FSharpLint will try to load the config at `fsharplint.json`. You can override this to point
 to a different file, for example by using the `--lint-config` flag in the dotnet tool.
 
 See the [Rule Configuration page](/how-tos/rule-configuration.html) for more info.

@@ -1,5 +1,6 @@
 ﻿namespace FSharpLint.FunctionalTest
 
+open FSharpLint.Application
 // fsharplint:disable TupleIndentation
 
 module Tests =
@@ -22,7 +23,10 @@ module Tests =
         override this.ToString() =
             sprintf "{\n    Description=\"%s\"\n    Location=\"%s\"\n    Code=\"%s\"\n}" this.Description this.Location this.Code
 
+    let workingDir = basePath </> "tests" </> "FSharpLint.FunctionalTest.TestedProject" </> "FSharpLint.FunctionalTest.TestedProject.NetCore"
+
     let dotnetFslint arguments =
+
         let binDir =
             #if DEBUG
                 "Debug"
@@ -38,7 +42,7 @@ module Tests =
                                  RedirectStandardOutput = true,
                                  RedirectStandardError = true,
                                  UseShellExecute = false,
-                                 WorkingDirectory = (basePath </> "tests" </> "FSharpLint.FunctionalTest.TestedProject" </> "FSharpLint.FunctionalTest.TestedProject.NetCore"))
+                                 WorkingDirectory = workingDir)
 
         use app = Process.Start(startInfo)
         let output = app.StandardOutput.ReadToEnd()
@@ -123,3 +127,32 @@ module Tests =
             Assert.AreEqual(expectedErrors, errors,
                 "Did not find the following expected errors: [" + String.concat "," expectedMissing + "]\n" +
                 "Found the following unexpected warnings: [" + String.concat "," notExpected + "]")
+
+        [<Test>]
+        member __.``generateConfig with no path generates config in fsharplint.json``() =
+            let arguments = "generate-config"
+            let expectedConfigFile = workingDir </> "fsharplint.json"
+            let _output = dotnetFslint arguments
+
+            let generatedConfig =
+                File.ReadAllText expectedConfigFile
+                |> ConfigurationManagement.loadConfigurationFile
+
+            File.Delete expectedConfigFile
+
+            Assert.AreEqual(Configuration.defaultConfiguration, generatedConfig)
+
+        [<Test>]
+        member __.``generateConfig with path generates config in specified path``() =
+            let customPath = "./newConfig.json"
+            let arguments = sprintf "generate-config --file %s" customPath
+            let _output = dotnetFslint arguments
+            let expectedConfigFile = workingDir </> customPath
+
+            let generatedConfig =
+                File.ReadAllText expectedConfigFile
+                |> ConfigurationManagement.loadConfigurationFile
+
+            File.Delete expectedConfigFile
+
+            Assert.AreEqual(Configuration.defaultConfiguration, generatedConfig)

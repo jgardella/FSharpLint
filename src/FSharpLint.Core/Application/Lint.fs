@@ -25,6 +25,13 @@ module ConfigurationManagement =
     let loadConfigurationFile (configText:string) =
         parseConfig configText
 
+    /// Generate the default FSharp config at the provided path.
+    /// If no path is provided, the config will be generated in the
+    /// current directory in `fsharplint.json`
+    let generateConfig (path:string option) =
+        let path = path |> Option.defaultValue SettingsFileName
+        writeConfig path Configuration.defaultConfiguration
+
 /// Provides an API for running FSharpLint from within another application.
 [<AutoOpen>]
 module Lint =
